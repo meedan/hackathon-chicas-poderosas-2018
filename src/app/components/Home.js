@@ -2,19 +2,32 @@ import React, { Component, PropTypes } from 'react';
 // Without Relay:
 // import Footer from './Footer';
 import FooterRelay from '../relay/FooterRelay';
+import CardsRelay from '../relay/CardsRelay';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      screen: 'home'
+    };
+  }
+
   render() {
     const { close, state } = this.props;
-    // Without Relay, render `Footer` directly instead of `FooterRelay` below:
-    // let about = { name: 'Application Name', version: '0.0.1' };
-    // <Footer {...this.props} about={about} />
     return (
       <div>
-        <h1>Hackathon</h1>
-        <p>@Change to add your content here!</p>
-        <p><small>Current URL: <span id="url" dangerouslySetInnerHTML={{__html: state.extension.url}}></span></small></p>
-        <FooterRelay {...this.props} />
+        { this.state.screen === 'home' ?
+        <div>
+          <h1>POLITI</h1>
+          <h2>quem?</h2>
+          <div className="summary">
+            <div id="line"></div>
+            <p>A plataforma para ver as relações dos candidatos do Brasil para as eleições.</p>
+          </div>
+          <CardsRelay {...this.props} />
+        </div>
+        : null }
       </div>
     );
   }
